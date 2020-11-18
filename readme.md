@@ -3,7 +3,7 @@
 ### Installation
 
 ```
-npm install --save-dev laravel-mix-filename-versioning
+npm install --save-dev rocke-red/laravel-mix-filename-versioning
 ```
 
 ### Usage
