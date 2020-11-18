@@ -12,7 +12,14 @@ class LaravelMixFilenameVersioning {
         }
         let originalAssetNameParts = path.parse(assetName);
         let newAssetFile = new File(path.join(Config.publicPath, assetName));
-        let newAssetFileName = newAssetFile.segments.name + '.' + newAssetFile.version().substr(0, 8) + newAssetFile.segments.ext;
+        
+        let versionSymbolPosition = newAssetFile.absolutePath.indexOf('?');
+        let fileExtension = newAssetFile.segments.ext;
+        if (versionSymbolPosition > 0) {
+            newAssetFile.absolutePath = newAssetFile.absolutePath.slice(0,versionSymbolPosition);
+            fileExtension = fileExtension.slice(0,fileExtension.indexOf('?'));
+        }
+        let newAssetFileName = newAssetFile.segments.name + '.' + newAssetFile.version().substr(0, 8) + fileExtension;
 
         newAssetFile.rename(newAssetFileName);
 
