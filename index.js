@@ -7,6 +7,9 @@ class LaravelMixFilenameVersioning {
       const newAssets = {};
 
       Object.keys(stats.compilation.assets).forEach(assetName => {
+        if (assetName.indexOf('font') >= 0) {
+            return;
+        }
         let originalAssetNameParts = path.parse(assetName);
         let newAssetFile = new File(path.join(Config.publicPath, assetName));
         let newAssetFileName = newAssetFile.segments.name + '.' + newAssetFile.version().substr(0, 8) + newAssetFile.segments.ext;
